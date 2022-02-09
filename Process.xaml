@@ -1,0 +1,151 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Process" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sxl="clr-namespace:System.Xml.Linq;assembly=System.Xml.Linq" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
+    <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>600.666666666667,1847.33333333333</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="376,1682.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sxl:XDocument" Name="masterfile" />
+      <Variable x:TypeArguments="sxl:XElement" Name="newDocument" />
+      <Variable x:TypeArguments="sxl:XDocument" Name="xdoc" />
+      <Variable x:TypeArguments="sxl:XElement" Name="variable1">
+        <Variable.Default>
+          <mva:VisualBasicValue x:TypeArguments="sxl:XElement" ExpressionText="xdoc.Descendants(&quot;ddd&quot;)" />
+        </Variable.Default>
+      </Variable>
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:Comment DisplayName="Comment (placeholder)" sap:VirtualizedContainerService.HintSize="334,55.3333333333333" sap2010:WorkflowViewState.IdRef="Comment_1" Text="//  Invoke steps of the process" />
+    <Assign sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sxl:XDocument">[masterfile]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sxl:XDocument">[new XDocument]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sxl:XElement">[newDocument]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sxl:XElement">[new XElement("root")]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="var downloadfolder = @&quot;G:\temp\&quot;; // your download folder where there are multiple files &#xD;&#xA;string[] files = Directory.GetFiles(downloadfolder);&#xD;&#xA;var masterfile = new XDocument(); &#xD;&#xA;XElement newDocument = new XElement(&quot;root&quot;);&#xD;&#xA;masterfile.Add(newDocument);&#xD;&#xA;foreach (var file in files)&#xD;&#xA;{&#x9;&#xD;&#xA; &#x9;Console.WriteLine(&quot;--------------------------------------------------&quot;);&#xD;&#xA; &#x9;Console.WriteLine(file);&#xD;&#xA; &#x9;Console.WriteLine(&quot;--------------------------------------------------&quot;);&#xD;&#xA; &#x9;XDocument xdoc = XDocument.Load(file);&#xD;&#xA; &#x9;masterfile.Root.Add(xdoc.Descendants(&quot;company&quot;)); //your root note&#xD;&#xA;}&#xD;&#xA;//masterfile.Dump();&#xD;&#xA;masterfile.Save( @&quot;G:\temp\merged_.xml&quot;);" DisplayName="Invoke code" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1" Language="CSharp">
+      <ui:InvokeCode.Arguments>
+        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="var xml1 = XDocument.Load(&quot;file1.xml&quot;);&#xD;&#xA;var xml2 = XDocument.Load(&quot;file2.xml&quot;);&#xD;&#xA;&#xD;&#xA;//Combine and remove duplicates&#xD;&#xA;var combinedUnique = xml1.Descendants(&quot;AllNodes&quot;)&#xD;&#xA;                          .Union(xml2.Descendants(&quot;AllNodes&quot;));&#xD;&#xA;&#xD;&#xA;//Combine and keep duplicates&#xD;&#xA;var combinedWithDups = xml1.Descendants(&quot;AllNodes&quot;)&#xD;&#xA;                           .Concat(xml2.Descendants(&quot;AllNodes&quot;));&#xD;&#xA;&#xD;&#xA;xml1.Save(&quot;path&quot;);&#xD;&#xA;&#xD;&#xA;//xml1.Descendants(&quot;NodeA&quot;).LastOrDefault().AddAfterSelf(xml2.Descendants(&quot;NodeA&quot;)); xml1.Save();" DisplayName="Invoke code" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_2" Language="CSharp">
+      <ui:InvokeCode.Arguments>
+        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <InvokeMethod DisplayName="Invoke Method" sap:VirtualizedContainerService.HintSize="334,137.333333333333" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="Add">
+      <InvokeMethod.TargetObject>
+        <InArgument x:TypeArguments="sxl:XDocument">[masterfile]</InArgument>
+      </InvokeMethod.TargetObject>
+      <InArgument x:TypeArguments="sxl:XElement">
+        <mva:VisualBasicValue x:TypeArguments="sxl:XElement" ExpressionText="newDocument" />
+      </InArgument>
+    </InvokeMethod>
+    <Assign sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_3">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sxl:XDocument">[xdoc]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sxl:XDocument">[XDocument.Load("path")]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <InvokeMethod DisplayName="Invoke Method" sap:VirtualizedContainerService.HintSize="334,137.333333333333" sap2010:WorkflowViewState.IdRef="InvokeMethod_2" MethodName="Load" TargetType="sxl:XDocument">
+      <InvokeMethod.Result>
+        <OutArgument x:TypeArguments="sxl:XDocument">[xdoc]</OutArgument>
+      </InvokeMethod.Result>
+      <InArgument x:TypeArguments="x:String">
+        <Literal x:TypeArguments="x:String">path</Literal>
+      </InArgument>
+    </InvokeMethod>
+    <InvokeMethod DisplayName="Invoke Method" sap:VirtualizedContainerService.HintSize="334,137.333333333333" sap2010:WorkflowViewState.IdRef="InvokeMethod_3" MethodName="Add">
+      <InvokeMethod.TargetObject>
+        <InArgument x:TypeArguments="sxl:XElement">[masterfile.Root]</InArgument>
+      </InvokeMethod.TargetObject>
+      <InArgument x:TypeArguments="sxl:XElement">
+        <mva:VisualBasicValue x:TypeArguments="sxl:XElement" ExpressionText="variable1" />
+      </InArgument>
+    </InvokeMethod>
+    <InvokeMethod DisplayName="Invoke Method" sap:VirtualizedContainerService.HintSize="334,137.333333333333" sap2010:WorkflowViewState.IdRef="InvokeMethod_4" MethodName="Save">
+      <InvokeMethod.TargetObject>
+        <InArgument x:TypeArguments="sxl:XDocument">[masterfile]</InArgument>
+      </InvokeMethod.TargetObject>
+      <InArgument x:TypeArguments="x:String">
+        <Literal x:TypeArguments="x:String">path</Literal>
+      </InArgument>
+    </InvokeMethod>
+  </Sequence>
+</Activity>
